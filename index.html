@@ -4,388 +4,164 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bridging the Philippine Digital Divide</title>
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- FontAwesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Chart.js -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        phBlue: '#0038A8',
-                        phRed: '#CE1126',
-                        phYellow: '#FCD116',
-                        darkNavy: '#0F172A',
-                    }
-                }
-            }
-        }
-    </script>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
-        body { font-family: 'Inter', sans-serif; }
-        
-        .page-view {
-            display: none;
-            opacity: 0;
-            transition: opacity 0.25s ease-in-out;
-        }
-        .page-view.active {
-            display: block;
-            opacity: 1;
-        }
+    <meta name="description" content="Policy brief on bridging the Philippine digital divide: five ranked solutions, a Solar Digital Community Center case study, SMART indicators, and an implementation timeline.">
+    <meta name="theme-color" content="#020617">
+    <meta property="og:title" content="Bridging the Philippine Digital Divide">
+    <meta property="og:description" content="Treating connectivity and power as essential public utilities: a policy brief and strategy dashboard.">
+    <meta property="og:type" content="website">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%232563eb'/%3E%3Cpath d='M8 21a11 11 0 0 1 16 0M11.5 17a6 6 0 0 1 9 0' stroke='white' stroke-width='2.4' stroke-linecap='round' fill='none'/%3E%3Ccircle cx='16' cy='23' r='1.8' fill='white'/%3E%3C/svg%3E">
 
-        /* Presentation Mode adjustments */
-        body.presentation-mode nav {
-            padding-top: 0.5rem;
-            padding-bottom: 0.5rem;
-        }
-        body.presentation-mode main {
-            max-width: 100% !important;
-            padding-left: 2rem;
-            padding-right: 2rem;
-        }
-        body.presentation-mode .pres-hide {
-            display: none !important;
-        }
-        body.presentation-mode .pres-lg-text {
-            font-size: 1.15rem;
-            line-height: 1.7;
-        }
-    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Tailwind (runtime build, no build step needed for GitHub Pages) -->
+    <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+    <link rel="stylesheet" href="css/styles.css">
+
+    <!-- Deferred scripts execute in order: libraries first, then the app modules. -->
+    <script defer src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+    <script defer src="js/data.js"></script>
+    <script defer src="js/views.js"></script>
+    <script defer src="js/charts.js"></script>
+    <script defer src="js/app.js"></script>
 </head>
-<body class="bg-slate-900 text-slate-100 min-h-screen flex flex-col transition-all duration-300">
+<body class="bg-slate-900 text-slate-100 min-h-screen flex flex-col">
+
+    <a href="#main" class="skip-link">Skip to content</a>
 
     <!-- Header & Navigation Bar -->
     <header class="bg-slate-950 border-b border-slate-800 sticky top-0 z-50 shadow-xl">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16">
-                <!-- Logo & Title -->
-                <div class="flex items-center space-x-3 cursor-pointer" onclick="navigateTo('overview')">
+                <a href="#/overview" class="flex items-center space-x-3" aria-label="Policy Brief and Strategy: Philippine Digital Divide, go to overview">
                     <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-blue-600 to-indigo-700 flex items-center justify-center text-white shadow-lg shadow-blue-500/30">
-                        <i class="fa-solid font-bold fa-network-wired text-lg"></i>
+                        <i class="fa-solid font-bold fa-network-wired text-lg" aria-hidden="true"></i>
                     </div>
                     <div>
-                        <span class="text-xs uppercase tracking-wider text-blue-400 font-bold block">Policy Brief & Strategy</span>
-                        <h1 class="text-sm sm:text-base font-bold text-white tracking-tight">Philippine Digital Divide</h1>
+                        <span class="text-xs uppercase tracking-wider text-blue-400 font-bold block whitespace-nowrap">Policy Brief &amp; Strategy</span>
+                        <h1 class="text-sm sm:text-base font-bold text-white tracking-tight whitespace-nowrap">Philippine Digital Divide</h1>
                     </div>
-                </div>
+                </a>
 
-                <!-- Desktop Navigation Tabs -->
-                <nav class="hidden lg:flex items-center space-x-1">
-                    <button onclick="navigateTo('overview')" id="nav-overview" class="nav-btn px-3 py-2 rounded-lg text-xs font-medium text-slate-300 hover:text-white hover:bg-slate-800 flex items-center space-x-2 transition-all">
-                        <i class="fa-solid fa-chart-line text-blue-400"></i>
-                        <span>Overview</span>
-                    </button>
-                    <button onclick="navigateTo('solutions')" id="nav-solutions" class="nav-btn px-3 py-2 rounded-lg text-xs font-medium text-slate-300 hover:text-white hover:bg-slate-800 flex items-center space-x-2 transition-all">
-                        <i class="fa-solid fa-layer-group text-emerald-400"></i>
-                        <span>5-Solution Matrix</span>
-                    </button>
-                    <button onclick="navigateTo('deepdive')" id="nav-deepdive" class="nav-btn px-3 py-2 rounded-lg text-xs font-medium text-slate-300 hover:text-white hover:bg-slate-800 flex items-center space-x-2 transition-all">
-                        <i class="fa-solid fa-solar-panel text-amber-400"></i>
-                        <span>Frontiers 2025 Deep-Dive</span>
-                    </button>
-                    <button onclick="navigateTo('smart')" id="nav-smart" class="nav-btn px-3 py-2 rounded-lg text-xs font-medium text-slate-300 hover:text-white hover:bg-slate-800 flex items-center space-x-2 transition-all">
-                        <i class="fa-solid fa-bullseye text-purple-400"></i>
-                        <span>SMART Indicators</span>
-                    </button>
-                    <button onclick="navigateTo('timeline')" id="nav-timeline" class="nav-btn px-3 py-2 rounded-lg text-xs font-medium text-slate-300 hover:text-white hover:bg-slate-800 flex items-center space-x-2 transition-all">
-                        <i class="fa-solid fa-tasks text-cyan-400"></i>
-                        <span>Timeline & Tasks</span>
-                    </button>
-                    <button onclick="navigateTo('references')" id="nav-references" class="nav-btn px-3 py-2 rounded-lg text-xs font-medium text-slate-300 hover:text-white hover:bg-slate-800 flex items-center space-x-2 transition-all">
-                        <i class="fa-solid fa-book-open text-rose-400"></i>
-                        <span>APA 7 References</span>
-                    </button>
-                </nav>
+                <nav id="desktop-nav" aria-label="Primary" class="hidden xl:flex items-center space-x-1"></nav>
 
-                <!-- Actions: Presentation Mode & Mobile Menu Button -->
                 <div class="flex items-center space-x-2">
-                    <button id="pres-toggle-btn" onclick="togglePresentationMode()" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-indigo-600/80 hover:bg-indigo-600 text-white flex items-center space-x-1.5 transition-all shadow-md">
-                        <i class="fa-solid fa-expand"></i>
-                        <span id="pres-text">Presentation Mode</span>
+                    <button type="button" id="pres-toggle-btn" aria-pressed="false" title="Toggle presentation mode (P)" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-indigo-600/80 hover:bg-indigo-600 text-white flex items-center space-x-1.5 whitespace-nowrap transition-all shadow-md">
+                        <i id="pres-icon" class="fa-solid fa-expand" aria-hidden="true"></i>
+                        <span id="pres-text" class="max-sm:sr-only xl:sr-only">Presentation Mode</span>
                     </button>
-                    
-                    <button onclick="toggleMobileMenu()" class="lg:hidden p-2 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 focus:outline-none">
-                        <i class="fa-solid fa-bars text-xl"></i>
+
+                    <button type="button" id="mobile-menu-btn" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mobile-menu" class="xl:hidden p-2 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800">
+                        <i class="fa-solid fa-bars text-xl" aria-hidden="true"></i>
                     </button>
                 </div>
             </div>
         </div>
 
-        <!-- Mobile Dropdown Menu -->
-        <div id="mobile-menu" class="hidden lg:hidden border-t border-slate-800 bg-slate-950 px-4 pt-2 pb-4 space-y-1">
-            <button onclick="navigateTo('overview'); toggleMobileMenu()" class="w-full text-left px-3 py-2 rounded-lg text-sm font-medium text-slate-300 hover:bg-slate-800 flex items-center space-x-3">
-                <i class="fa-solid fa-chart-line text-blue-400 w-5"></i><span>Overview & Core Issue</span>
-            </button>
-            <button onclick="navigateTo('solutions'); toggleMobileMenu()" class="w-full text-left px-3 py-2 rounded-lg text-sm font-medium text-slate-300 hover:bg-slate-800 flex items-center space-x-3">
-                <i class="fa-solid fa-layer-group text-emerald-400 w-5"></i><span>5-Solution Matrix</span>
-            </button>
-            <button onclick="navigateTo('deepdive'); toggleMobileMenu()" class="w-full text-left px-3 py-2 rounded-lg text-sm font-medium text-slate-300 hover:bg-slate-800 flex items-center space-x-3">
-                <i class="fa-solid fa-solar-panel text-amber-400 w-5"></i><span>Frontiers 2025 Deep-Dive</span>
-            </button>
-            <button onclick="navigateTo('smart'); toggleMobileMenu()" class="w-full text-left px-3 py-2 rounded-lg text-sm font-medium text-slate-300 hover:bg-slate-800 flex items-center space-x-3">
-                <i class="fa-solid fa-bullseye text-purple-400 w-5"></i><span>SMART Indicators</span>
-            </button>
-            <button onclick="navigateTo('timeline'); toggleMobileMenu()" class="w-full text-left px-3 py-2 rounded-lg text-sm font-medium text-slate-300 hover:bg-slate-800 flex items-center space-x-3">
-                <i class="fa-solid fa-tasks text-cyan-400 w-5"></i><span>Timeline & Tasks</span>
-            </button>
-            <button onclick="navigateTo('references'); toggleMobileMenu()" class="w-full text-left px-3 py-2 rounded-lg text-sm font-medium text-slate-300 hover:bg-slate-800 flex items-center space-x-3">
-                <i class="fa-solid fa-book-open text-rose-400 w-5"></i><span>APA 7 References</span>
-            </button>
-        </div>
+        <nav id="mobile-menu" aria-label="Mobile" class="hidden xl:hidden border-t border-slate-800 bg-slate-950 px-4 pt-2 pb-4 space-y-1"></nav>
     </header>
 
-    <!-- Main Container for View Pages -->
-    <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
+    <main id="main" tabindex="-1" class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
 
         <!-- PAGE 1: OVERVIEW & CORE ISSUE -->
-        <section id="page-overview" class="page-view active space-y-6">
-            <!-- Hero Banner -->
+        <section id="page-overview" class="page-view active space-y-6" aria-labelledby="overview-title">
             <div class="relative bg-gradient-to-r from-blue-900/60 via-slate-900 to-indigo-950 p-6 sm:p-8 rounded-2xl border border-blue-500/20 shadow-2xl overflow-hidden">
                 <div class="absolute -right-10 -bottom-10 opacity-10 pointer-events-none">
-                    <i class="fa-solid fa-tower-cell text-9xl text-blue-400"></i>
+                    <i class="fa-solid fa-tower-cell text-9xl text-blue-400" aria-hidden="true"></i>
                 </div>
-                <div class="max-w-3xl">
+                <div class="max-w-3xl relative">
                     <span class="px-3 py-1 bg-blue-500/20 text-blue-300 rounded-full text-xs font-semibold border border-blue-500/30">Public Utility Mandate</span>
-                    <h2 class="text-2xl sm:text-4xl font-extrabold text-white mt-3 leading-tight">
-                        Treating Connectivity & Power as Essential Public Utilities
+                    <h2 id="overview-title" class="text-2xl sm:text-4xl font-extrabold text-white mt-3 leading-tight">
+                        Treating Connectivity &amp; Power as Essential Public Utilities
                     </h2>
-                    <p class="text-slate-300 text-sm sm:text-base mt-2 pres-lg-text">
+                    <p class="text-slate-300 text-sm sm:text-base mt-2">
                         Addressing structural inequalities across the Philippine archipelago through integrated solar infrastructure, municipal cell towers, and institutional reforms.
                     </p>
                     <div class="mt-4 pt-4 border-t border-slate-800/80 flex flex-wrap gap-4 text-xs text-slate-400">
                         <div class="flex items-center space-x-1.5">
-                            <i class="fa-solid fa-users text-blue-400"></i>
-                            <span><strong>Authors:</strong> Asunciana Salibio Aros, Nicholette Rodriguez, Jared Mesa</span>
+                            <i class="fa-solid fa-users text-blue-400" aria-hidden="true"></i>
+                            <span><strong>Authors:</strong> <span data-authors></span></span>
                         </div>
                         <div class="flex items-center space-x-1.5">
-                            <i class="fa-solid fa-graduation-cap text-amber-400"></i>
+                            <i class="fa-solid fa-graduation-cap text-amber-400" aria-hidden="true"></i>
                             <span>Mapúa Malayan Digital College</span>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Key Metric Cards -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                <div class="bg-slate-800/60 p-5 rounded-xl border border-slate-700/60 hover:border-blue-500/40 transition-all">
-                    <div class="flex justify-between items-start">
-                        <span class="text-xs font-medium text-slate-400">Electricity Grid Access</span>
-                        <div class="p-2 bg-emerald-500/10 text-emerald-400 rounded-lg"><i class="fa-solid fa-bolt"></i></div>
-                    </div>
-                    <div class="text-3xl font-bold text-white mt-2">98.5%</div>
-                    <p class="text-xs text-slate-400 mt-1">Barangays connected to power grid</p>
-                </div>
+            <div id="metrics-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4"></div>
 
-                <div class="bg-slate-800/60 p-5 rounded-xl border border-slate-700/60 hover:border-red-500/40 transition-all">
-                    <div class="flex justify-between items-start">
-                        <span class="text-xs font-medium text-slate-400">Telecom Tower Coverage</span>
-                        <div class="p-2 bg-red-500/10 text-red-400 rounded-lg"><i class="fa-solid fa-broadcast-tower"></i></div>
-                    </div>
-                    <div class="text-3xl font-bold text-white mt-2">36.3%</div>
-                    <p class="text-xs text-slate-400 mt-1">Barangays with cellular tower access</p>
-                </div>
-
-                <div class="bg-slate-800/60 p-5 rounded-xl border border-slate-700/60 hover:border-amber-500/40 transition-all">
-                    <div class="flex justify-between items-start">
-                        <span class="text-xs font-medium text-slate-400">Fixed Broadband Penetration</span>
-                        <div class="p-2 bg-amber-500/10 text-amber-400 rounded-lg"><i class="fa-solid fa-house-signal"></i></div>
-                    </div>
-                    <div class="text-3xl font-bold text-white mt-2">18.0%</div>
-                    <p class="text-xs text-slate-400 mt-1">Household broadband subscription rate</p>
-                </div>
-
-                <div class="bg-slate-800/60 p-5 rounded-xl border border-slate-700/60 hover:border-purple-500/40 transition-all">
-                    <div class="flex justify-between items-start">
-                        <span class="text-xs font-medium text-slate-400">NCR vs BARMM Disparity</span>
-                        <div class="p-2 bg-purple-500/10 text-purple-400 rounded-lg"><i class="fa-solid fa-chart-pie"></i></div>
-                    </div>
-                    <div class="text-3xl font-bold text-white mt-2">33% vs 4%</div>
-                    <p class="text-xs text-slate-400 mt-1">Internet access disparity ratio</p>
-                </div>
-            </div>
-
-            <!-- Problem Visualization & Analytical Insights -->
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                <!-- Interactive Chart Panel -->
-                <div class="bg-slate-800/80 p-5 rounded-2xl border border-slate-700">
-                    <div class="flex justify-between items-center mb-4">
+                <figure class="bg-slate-800/80 p-5 rounded-2xl border border-slate-700">
+                    <div class="flex justify-between items-center mb-4 gap-2">
                         <h3 class="text-base font-bold text-white flex items-center gap-2">
-                            <i class="fa-solid fa-chart-column text-blue-400"></i> Infrastructure Disparity Gap
+                            <i class="fa-solid fa-chart-column text-blue-400" aria-hidden="true"></i> Infrastructure Disparity Gap
                         </h3>
                         <span class="text-xs text-slate-400">National DICT / PSA Metrics</span>
                     </div>
                     <div class="h-64 relative">
-                        <canvas id="disparityChart"></canvas>
+                        <canvas id="disparityChart" role="img" aria-label="Bar chart of access percentages: electricity 98.5, telecom towers 36.3, broadband subscriptions 18, NCR internet 33, BARMM internet 4."></canvas>
                     </div>
-                </div>
+                </figure>
 
-                <!-- Strategic Context Box -->
                 <div class="bg-slate-800/80 p-5 rounded-2xl border border-slate-700 flex flex-col justify-between space-y-4">
                     <div>
                         <h3 class="text-base font-bold text-white flex items-center gap-2 mb-3">
-                            <i class="fa-solid fa-triangle-exclamation text-amber-400"></i> Institutional Disconnect
+                            <i class="fa-solid fa-triangle-exclamation text-amber-400" aria-hidden="true"></i> Institutional Disconnect
                         </h3>
-                        <p class="text-sm text-slate-300 leading-relaxed pres-lg-text">
+                        <p class="text-sm text-slate-300 leading-relaxed">
                             While electricity grid access reaches nearly 98.5% of barangays, telecommunications infrastructure severely lags behind at 36.3%. This creates a paradox: communities have electricity to power devices, but no signal to connect to global digital networks.
                         </p>
-                        <div class="mt-4 p-3.5 bg-slate-900/80 rounded-xl border border-slate-700/50 space-y-2">
-                            <div class="flex items-center justify-between text-xs">
-                                <span class="text-slate-400">Geographic Isolation (GIDA):</span>
-                                <span class="text-red-400 font-semibold">High Cost per Tower</span>
+                        <dl class="mt-4 p-3.5 bg-slate-900/80 rounded-xl border border-slate-700/50 space-y-2 text-xs">
+                            <div class="flex items-center justify-between gap-3">
+                                <dt class="text-slate-400">Geographic Isolation (GIDA):</dt>
+                                <dd class="text-red-400 font-semibold text-right">High Cost per Tower</dd>
                             </div>
-                            <div class="flex items-center justify-between text-xs">
-                                <span class="text-slate-400">Private Telecom ROI Threshold:</span>
-                                <span class="text-amber-400 font-semibold">Unfavorable Market Dynamic</span>
+                            <div class="flex items-center justify-between gap-3">
+                                <dt class="text-slate-400">Private Telecom ROI Threshold:</dt>
+                                <dd class="text-amber-400 font-semibold text-right">Unfavorable Market Dynamic</dd>
                             </div>
-                            <div class="flex items-center justify-between text-xs">
-                                <span class="text-slate-400">Policy Recommendation:</span>
-                                <span class="text-emerald-400 font-semibold">Classify Broadband as Public Utility</span>
+                            <div class="flex items-center justify-between gap-3">
+                                <dt class="text-slate-400">Policy Recommendation:</dt>
+                                <dd class="text-emerald-400 font-semibold text-right">Classify Broadband as Public Utility</dd>
                             </div>
-                        </div>
+                        </dl>
                     </div>
-                    <button onclick="navigateTo('solutions')" class="w-full py-2.5 bg-blue-600 hover:bg-blue-500 text-white rounded-xl font-medium text-xs sm:text-sm flex items-center justify-center space-x-2 transition-all">
+                    <button type="button" data-nav="solutions" class="w-full py-2.5 bg-blue-600 hover:bg-blue-500 text-white rounded-xl font-medium text-xs sm:text-sm flex items-center justify-center space-x-2 transition-all">
                         <span>Explore the 5 Ranked Solutions</span>
-                        <i class="fa-solid fa-arrow-right"></i>
+                        <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
                     </button>
                 </div>
             </div>
         </section>
 
         <!-- PAGE 2: 5-SOLUTION MATRIX -->
-        <section id="page-solutions" class="page-view space-y-6">
-            <div class="bg-slate-800/40 p-5 rounded-2xl border border-slate-800 flex justify-between items-center">
+        <section id="page-solutions" class="page-view space-y-6" aria-labelledby="solutions-title">
+            <div class="bg-slate-800/40 p-5 rounded-2xl border border-slate-800 flex justify-between items-center gap-3">
                 <div>
-                    <h2 class="text-xl sm:text-2xl font-bold text-white">5-Solution Ranked Matrix</h2>
+                    <h2 id="solutions-title" class="text-xl sm:text-2xl font-bold text-white">5-Solution Ranked Matrix</h2>
                     <p class="text-xs sm:text-sm text-slate-400">Ranked by impact, feasibility, and technical sustainability for Philippine conditions.</p>
                 </div>
-                <span class="px-3 py-1 bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 rounded-full text-xs font-semibold">Ranked #1-#5</span>
+                <span class="px-3 py-1 bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 rounded-full text-xs font-semibold whitespace-nowrap">Ranked #1-#5</span>
             </div>
-
-            <!-- Solutions Grid -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-                <!-- Solution 1 -->
-                <div class="bg-slate-800/90 rounded-2xl p-5 border border-amber-500/40 shadow-lg relative flex flex-col justify-between">
-                    <div class="absolute -top-3 -right-3 w-8 h-8 rounded-full bg-amber-500 text-slate-950 font-extrabold flex items-center justify-center text-sm shadow-md">#1</div>
-                    <div>
-                        <div class="flex items-center space-x-3 mb-3">
-                            <div class="p-3 bg-amber-500/10 text-amber-400 rounded-xl"><i class="fa-solid fa-solar-panel text-xl"></i></div>
-                            <div>
-                                <h3 class="text-base font-bold text-white">Solar Digital Community Centers (DCCs)</h3>
-                                <span class="text-xs text-amber-400 font-medium">Top Priority Solution</span>
-                            </div>
-                        </div>
-                        <p class="text-xs text-slate-300 leading-relaxed mb-4">
-                            Deploy solar-powered microgrids coupled with satellite/fiber hubs in off-grid GIDAs to deliver uninterrupted power, internet, and community upskilling.
-                        </p>
-                    </div>
-                    <button onclick="navigateTo('deepdive')" class="w-full py-2 bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 text-xs font-semibold rounded-lg border border-amber-500/30 transition-all flex items-center justify-center space-x-1">
-                        <span>View Frontiers 2025 Deep-Dive</span>
-                        <i class="fa-solid fa-angle-right"></i>
-                    </button>
-                </div>
-
-                <!-- Solution 2 -->
-                <div class="bg-slate-800/80 rounded-2xl p-5 border border-slate-700 relative flex flex-col justify-between">
-                    <div class="absolute -top-3 -right-3 w-8 h-8 rounded-full bg-slate-700 text-slate-200 font-bold flex items-center justify-center text-sm">#2</div>
-                    <div>
-                        <div class="flex items-center space-x-3 mb-3">
-                            <div class="p-3 bg-blue-500/10 text-blue-400 rounded-xl"><i class="fa-solid fa-tower-observation text-xl"></i></div>
-                            <div>
-                                <h3 class="text-base font-bold text-white">Infrastructure Sharing & Open Access</h3>
-                                <span class="text-xs text-blue-400 font-medium">Policy & Legislative Reform</span>
-                            </div>
-                        </div>
-                        <p class="text-xs text-slate-300 leading-relaxed mb-4">
-                            Mandate common tower sharing and open-access broadband rules (Open Access in Data Transmission Act) to lower CAPEX for telcos in remote areas.
-                        </p>
-                    </div>
-                    <div class="text-xs text-slate-500 border-t border-slate-700/50 pt-2 flex justify-between">
-                        <span>Target: DICT, NTC, Congress</span>
-                        <span>CAPEX Reduction: ~40%</span>
-                    </div>
-                </div>
-
-                <!-- Solution 3 -->
-                <div class="bg-slate-800/80 rounded-2xl p-5 border border-slate-700 relative flex flex-col justify-between">
-                    <div class="absolute -top-3 -right-3 w-8 h-8 rounded-full bg-slate-700 text-slate-200 font-bold flex items-center justify-center text-sm">#3</div>
-                    <div>
-                        <div class="flex items-center space-x-3 mb-3">
-                            <div class="p-3 bg-emerald-500/10 text-emerald-400 rounded-xl"><i class="fa-solid fa-wifi text-xl"></i></div>
-                            <div>
-                                <h3 class="text-base font-bold text-white">National Free Public Wi-Fi Expansion</h3>
-                                <span class="text-xs text-emerald-400 font-medium">RA 10929 Scaling</span>
-                            </div>
-                        </div>
-                        <p class="text-xs text-slate-300 leading-relaxed mb-4">
-                            Accelerate the implementation of Free Wi-Fi in Public Places in rural schools, municipal halls, and rural health units with dedicated LGU maintenance funding.
-                        </p>
-                    </div>
-                    <div class="text-xs text-slate-500 border-t border-slate-700/50 pt-2 flex justify-between">
-                        <span>Focus: Public Schools & Health Units</span>
-                        <span>Status: Scaling Phase</span>
-                    </div>
-                </div>
-
-                <!-- Solution 4 -->
-                <div class="bg-slate-800/80 rounded-2xl p-5 border border-slate-700 relative flex flex-col justify-between">
-                    <div class="absolute -top-3 -right-3 w-8 h-8 rounded-full bg-slate-700 text-slate-200 font-bold flex items-center justify-center text-sm">#4</div>
-                    <div>
-                        <div class="flex items-center space-x-3 mb-3">
-                            <div class="p-3 bg-cyan-500/10 text-cyan-400 rounded-xl"><i class="fa-solid fa-satellite text-xl"></i></div>
-                            <div>
-                                <h3 class="text-base font-bold text-white">Satellite Internet Backhaul (LEO)</h3>
-                                <span class="text-xs text-cyan-400 font-medium">Island & GIDA Connection</span>
-                            </div>
-                        </div>
-                        <p class="text-xs text-slate-300 leading-relaxed mb-4">
-                            Leverage Low Earth Orbit (LEO) satellite technology to provide rapid backhaul internet to isolated islands where undersea fiber optic cables are cost-prohibitive.
-                        </p>
-                    </div>
-                    <div class="text-xs text-slate-500 border-t border-slate-700/50 pt-2 flex justify-between">
-                        <span>Tech: Starlink / LEO Constellations</span>
-                        <span>Deployment: Immediate</span>
-                    </div>
-                </div>
-
-                <!-- Solution 5 -->
-                <div class="bg-slate-800/80 rounded-2xl p-5 border border-slate-700 relative flex flex-col justify-between">
-                    <div class="absolute -top-3 -right-3 w-8 h-8 rounded-full bg-slate-700 text-slate-200 font-bold flex items-center justify-center text-sm">#5</div>
-                    <div>
-                        <div class="flex items-center space-x-3 mb-3">
-                            <div class="p-3 bg-purple-500/10 text-purple-400 rounded-xl"><i class="fa-solid fa-user-graduate text-xl"></i></div>
-                            <div>
-                                <h3 class="text-base font-bold text-white">Digital Literacy & Skill Integration</h3>
-                                <span class="text-xs text-purple-400 font-medium">Human Capital Capacity</span>
-                            </div>
-                        </div>
-                        <p class="text-xs text-slate-300 leading-relaxed mb-4">
-                            Establish localized digital literacy programs tailored to agricultural, fishing, and informal workers to ensure technology translates into socioeconomic mobility.
-                        </p>
-                    </div>
-                    <div class="text-xs text-slate-500 border-t border-slate-700/50 pt-2 flex justify-between">
-                        <span>Partners: TESDA, DICT, DepEd</span>
-                        <span>Focus: Native Languages</span>
-                    </div>
-                </div>
-            </div>
+            <div id="solutions-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5"></div>
         </section>
 
         <!-- PAGE 3: FRONTIERS 2025 DEEP-DIVE -->
-        <section id="page-deepdive" class="page-view space-y-6">
+        <section id="page-deepdive" class="page-view space-y-6" aria-labelledby="deepdive-title">
             <div class="bg-gradient-to-r from-amber-900/40 via-slate-900 to-slate-900 p-6 rounded-2xl border border-amber-500/30">
                 <div class="flex flex-wrap items-center justify-between gap-2">
                     <div>
                         <span class="px-2.5 py-1 bg-amber-500/20 text-amber-300 rounded-md text-xs font-bold border border-amber-500/30">Solution 1 Case Study</span>
-                        <h2 class="text-xl sm:text-3xl font-extrabold text-white mt-2">Solar Digital Community Centers (DCCs)</h2>
+                        <h2 id="deepdive-title" class="text-xl sm:text-3xl font-extrabold text-white mt-2">Solar Digital Community Centers (DCCs)</h2>
                     </div>
-                    <a href="https://doi.org/10.3389/frma.2025.1488916" target="_blank" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs rounded-lg border border-slate-600 flex items-center space-x-1 transition-all">
-                        <i class="fa-solid fa-external-link text-xs"></i>
+                    <a href="https://doi.org/10.3389/frma.2025.1488916" target="_blank" rel="noopener noreferrer" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs rounded-lg border border-slate-600 flex items-center space-x-1 transition-all">
+                        <i class="fa-solid fa-external-link text-xs" aria-hidden="true"></i>
                         <span>DOI: 10.3389/frma.2025.1488916</span>
+                        <span class="sr-only">(opens in a new tab)</span>
                     </a>
                 </div>
                 <p class="text-xs sm:text-sm text-slate-300 mt-2">
@@ -394,10 +170,9 @@
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                <!-- Key Findings Column 1 -->
-                <div class="bg-slate-800/80 p-5 rounded-2xl border border-slate-700 space-y-4">
+                <article class="bg-slate-800/80 p-5 rounded-2xl border border-slate-700 space-y-4">
                     <h3 class="text-sm font-bold text-amber-400 uppercase tracking-wider flex items-center gap-2">
-                        <i class="fa-solid fa-earth-americas"></i> Empirical Guatemala Case
+                        <i class="fa-solid fa-earth-americas" aria-hidden="true"></i> Empirical Guatemala Case
                     </h3>
                     <div class="space-y-3 text-xs text-slate-300">
                         <p>
@@ -409,29 +184,25 @@
                             <li><strong class="text-slate-200">Gender Dynamics:</strong> Integration of "Positive Masculinity Workshops" to engage local male leaders and reduce cultural opposition to female digital literacy.</li>
                         </ul>
                     </div>
-                </div>
+                </article>
 
-                <!-- Philippine Adaptation Column 2 -->
-                <div class="bg-slate-800/80 p-5 rounded-2xl border border-slate-700 space-y-4">
+                <article class="bg-slate-800/80 p-5 rounded-2xl border border-slate-700 space-y-4">
                     <h3 class="text-sm font-bold text-blue-400 uppercase tracking-wider flex items-center gap-2">
-                        <i class="fa-solid fa-map-location-dot"></i> Philippine GIDA Adaptation
+                        <i class="fa-solid fa-map-location-dot" aria-hidden="true"></i> Philippine GIDA Adaptation
                     </h3>
                     <div class="space-y-3 text-xs text-slate-300">
-                        <p>
-                            Adapting the model to Philippine island geography and cultural contexts:
-                        </p>
+                        <p>Adapting the model to Philippine island geography and cultural contexts:</p>
                         <ul class="space-y-2 list-disc list-inside text-slate-400">
                             <li><strong class="text-slate-200">Language Customization:</strong> Training modules translated into Tagalog, Cebuano, Ilocano, and Hiligaynon.</li>
                             <li><strong class="text-slate-200">Travel Reduction:</strong> Reduces administrative travel time to municipal halls by up to <strong class="text-emerald-400">75%</strong> by hosting digital LGU services locally.</li>
                             <li><strong class="text-slate-200">Typhoon Hardening:</strong> Solar panels with modular collapsible mounts designed for Philippine disaster resilience.</li>
                         </ul>
                     </div>
-                </div>
+                </article>
 
-                <!-- Quantitative Impact Column 3 -->
-                <div class="bg-slate-800/80 p-5 rounded-2xl border border-slate-700 space-y-4">
+                <article class="bg-slate-800/80 p-5 rounded-2xl border border-slate-700 space-y-4">
                     <h3 class="text-sm font-bold text-emerald-400 uppercase tracking-wider flex items-center gap-2">
-                        <i class="fa-solid fa-chart-line"></i> Measured Outcomes
+                        <i class="fa-solid fa-chart-line" aria-hidden="true"></i> Measured Outcomes
                     </h3>
                     <div class="space-y-3">
                         <div class="p-3 bg-slate-900/80 rounded-xl border border-slate-700/50">
@@ -442,376 +213,86 @@
                         <div class="p-3 bg-slate-900/80 rounded-xl border border-slate-700/50">
                             <span class="text-xs text-slate-400 block">Cost Savings per Household</span>
                             <span class="text-2xl font-bold text-blue-400">₱1,200 / mo</span>
-                            <span class="text-xs text-slate-400 block mt-1">Saved on fuel, charging fees, & transit</span>
+                            <span class="text-xs text-slate-400 block mt-1">Saved on fuel, charging fees, &amp; transit</span>
                         </div>
                     </div>
-                </div>
+                </article>
             </div>
         </section>
 
         <!-- PAGE 4: SMART INDICATORS & EVALUATION -->
-        <section id="page-smart" class="page-view space-y-6">
-            <div class="bg-slate-800/40 p-5 rounded-2xl border border-slate-800 flex justify-between items-center">
-                <div>
-                    <h2 class="text-xl sm:text-2xl font-bold text-white">SMART Indicators Framework</h2>
-                    <p class="text-xs sm:text-sm text-slate-400">Monitoring & evaluation metrics to ensure accountability and long-term viability.</p>
-                </div>
+        <section id="page-smart" class="page-view space-y-6" aria-labelledby="smart-title">
+            <div class="bg-slate-800/40 p-5 rounded-2xl border border-slate-800">
+                <h2 id="smart-title" class="text-xl sm:text-2xl font-bold text-white">SMART Indicators Framework</h2>
+                <p class="text-xs sm:text-sm text-slate-400">Monitoring &amp; evaluation metrics to ensure accountability and long-term viability.</p>
             </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <!-- Specific -->
-                <div class="bg-slate-800/80 p-5 rounded-2xl border border-slate-700 flex items-start space-x-4">
-                    <div class="w-12 h-12 rounded-xl bg-blue-500/10 text-blue-400 flex items-center justify-center font-bold text-xl flex-shrink-0">S</div>
-                    <div>
-                        <h3 class="text-base font-bold text-white">Specific</h3>
-                        <p class="text-xs text-slate-300 mt-1 leading-relaxed">
-                            Establish 500 Solar Digital Community Centers in target GIDA barangays across Luzon, Visayas, and Mindanao.
-                        </p>
-                    </div>
-                </div>
-
-                <!-- Measurable -->
-                <div class="bg-slate-800/80 p-5 rounded-2xl border border-slate-700 flex items-start space-x-4">
-                    <div class="w-12 h-12 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center font-bold text-xl flex-shrink-0">M</div>
-                    <div>
-                        <h3 class="text-base font-bold text-white">Measurable</h3>
-                        <p class="text-xs text-slate-300 mt-1 leading-relaxed">
-                            Increase barangay cellular/broadband access from 36.3% to 65% and achieve 80% completion in local digital literacy programs.
-                        </p>
-                    </div>
-                </div>
-
-                <!-- Achievable -->
-                <div class="bg-slate-800/80 p-5 rounded-2xl border border-slate-700 flex items-start space-x-4">
-                    <div class="w-12 h-12 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center font-bold text-xl flex-shrink-0">A</div>
-                    <div>
-                        <h3 class="text-base font-bold text-white">Achievable</h3>
-                        <p class="text-xs text-slate-300 mt-1 leading-relaxed">
-                            Funded through joint DICT Universal Access Fund, LGU counterpart funds, and international climate-tech grants.
-                        </p>
-                    </div>
-                </div>
-
-                <!-- Relevant -->
-                <div class="bg-slate-800/80 p-5 rounded-2xl border border-slate-700 flex items-start space-x-4">
-                    <div class="w-12 h-12 rounded-xl bg-purple-500/10 text-purple-400 flex items-center justify-center font-bold text-xl flex-shrink-0">R</div>
-                    <div>
-                        <h3 class="text-base font-bold text-white">Relevant</h3>
-                        <p class="text-xs text-slate-300 mt-1 leading-relaxed">
-                            Directly aligns with the Philippine Development Plan (PDP) 2023-2028 and Sustainable Development Goals (SDG 7 & SDG 9).
-                        </p>
-                    </div>
-                </div>
-
-                <!-- Time-Bound -->
-                <div class="bg-slate-800/80 p-5 rounded-2xl border border-slate-700 flex items-start space-x-4 md:col-span-2">
-                    <div class="w-12 h-12 rounded-xl bg-cyan-500/10 text-cyan-400 flex items-center justify-center font-bold text-xl flex-shrink-0">T</div>
-                    <div>
-                        <h3 class="text-base font-bold text-white">Time-Bound</h3>
-                        <p class="text-xs text-slate-300 mt-1 leading-relaxed">
-                            Phase 1 Pilot (Months 1-12), Phase 2 Scaling (Months 13-36), Phase 3 Institutionalization & Full LGU Transfer (Months 37-60).
-                        </p>
-                    </div>
-                </div>
-            </div>
+            <div id="smart-grid" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
         </section>
 
         <!-- PAGE 5: TIMELINE & TASKS -->
-        <section id="page-timeline" class="page-view space-y-6">
-            <div class="bg-slate-800/40 p-5 rounded-2xl border border-slate-800 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <section id="page-timeline" class="page-view space-y-6" aria-labelledby="timeline-title">
+            <div class="bg-slate-800/40 p-5 rounded-2xl border border-slate-800 space-y-4">
                 <div>
-                    <h2 class="text-xl sm:text-2xl font-bold text-white">Implementation Timeline & Tasks</h2>
+                    <h2 id="timeline-title" class="text-xl sm:text-2xl font-bold text-white">Implementation Timeline &amp; Tasks</h2>
                     <p class="text-xs sm:text-sm text-slate-400">Filterable task roadmap covering policy, infrastructure, and deployment phases.</p>
                 </div>
-                <div class="flex items-center space-x-2">
-                    <button onclick="filterTasks('all')" class="task-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-blue-600 text-white">All</button>
-                    <button onclick="filterTasks('phase1')" class="task-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 text-slate-300 hover:bg-slate-700">Phase 1</button>
-                    <button onclick="filterTasks('phase2')" class="task-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 text-slate-300 hover:bg-slate-700">Phase 2</button>
-                    <button onclick="filterTasks('phase3')" class="task-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 text-slate-300 hover:bg-slate-700">Phase 3</button>
-                </div>
+                <div id="task-summary"></div>
             </div>
 
-            <!-- Task Items List -->
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                <div id="task-filters" role="group" aria-label="Filter tasks by phase" class="flex flex-wrap items-center gap-2"></div>
+                <label class="flex items-center gap-2 text-xs text-slate-400">
+                    <span>Status</span>
+                    <select id="task-status" class="bg-slate-900 border border-slate-700 rounded-lg px-2 py-1.5 text-xs text-slate-200 focus:outline-none focus:border-blue-500"></select>
+                </label>
+            </div>
+            <p id="task-count" class="text-xs text-slate-400 -mt-3" role="status"></p>
+
             <div class="bg-slate-800/80 rounded-2xl border border-slate-700 overflow-hidden">
-                <div class="divide-y divide-slate-700/60" id="task-list-container">
-                    <!-- Dynamic tasks rendered via JavaScript -->
-                </div>
+                <div class="divide-y divide-slate-700/60" id="task-list-container"></div>
             </div>
         </section>
 
         <!-- PAGE 6: APA 7 REFERENCES -->
-        <section id="page-references" class="page-view space-y-6">
+        <section id="page-references" class="page-view space-y-6" aria-labelledby="references-title">
             <div class="bg-slate-800/40 p-5 rounded-2xl border border-slate-800 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                 <div>
-                    <h2 class="text-xl sm:text-2xl font-bold text-white">APA 7 Academic References</h2>
+                    <h2 id="references-title" class="text-xl sm:text-2xl font-bold text-white">APA 7 Academic References</h2>
                     <p class="text-xs sm:text-sm text-slate-400">Filter and search peer-reviewed citations, government reports, and international studies.</p>
                 </div>
                 <div class="relative w-full sm:w-64">
-                    <i class="fa-solid fa-search absolute left-3 top-3 text-xs text-slate-400"></i>
-                    <input type="text" id="ref-search" onkeyup="searchReferences()" placeholder="Search citations..." class="w-full bg-slate-900 border border-slate-700 rounded-xl pl-9 pr-4 py-2 text-xs text-slate-200 focus:outline-none focus:border-blue-500">
+                    <i class="fa-solid fa-search absolute left-3 top-3 text-xs text-slate-400" aria-hidden="true"></i>
+                    <input type="search" id="ref-search" aria-label="Search citations" placeholder="Search citations..." autocomplete="off" class="w-full bg-slate-900 border border-slate-700 rounded-xl pl-9 pr-4 py-2 text-xs text-slate-200 focus:outline-none focus:border-blue-500">
                 </div>
             </div>
 
             <div class="bg-slate-800/80 rounded-2xl border border-slate-700 p-6">
-                <ul class="space-y-4 text-xs sm:text-sm text-slate-300 leading-relaxed" id="reference-list">
-                    <li class="ref-item pl-8 -indent-8">
-                        Ortiz Osejo, J. A., et al. (2025). Solar-powered digital community centers: Evaluating the UN Energy Compact implementation for rural connectivity and gender inclusion. <em>Frontiers in Research Metrics and Analytics</em>, 10, Article 1488916. <a href="https://doi.org/10.3389/frma.2025.1488916" target="_blank" class="text-blue-400 underline">https://doi.org/10.3389/frma.2025.1488916</a>
-                    </li>
-                    <li class="ref-item pl-8 -indent-8">
-                        Department of Information and Communications Technology. (2023). <em>National Broadband Plan (NBP) Phase 1 Implementation Assessment Report</em>. DICT Executive Publications.
-                    </li>
-                    <li class="ref-item pl-8 -indent-8">
-                        Philippine Statistics Authority. (2022). <em>National Information and Communications Technology Household Survey (NICTHS)</em>. Republic of the Philippines.
-                    </li>
-                    <li class="ref-item pl-8 -indent-8">
-                        United Nations Development Programme. (2023). <em>Digital inclusion in geographically isolated and disadvantaged areas (GIDA) in Southeast Asia</em>. UNDP Governance Reports.
-                    </li>
-                    <li class="ref-item pl-8 -indent-8">
-                        World Bank. (2024). <em>Fostering digital inclusion in the Philippines: Infrastructure sharing and policy reforms</em>. World Bank Group.
-                    </li>
-                </ul>
+                <p id="ref-status" class="text-xs text-slate-400 mb-3 empty:hidden" role="status"></p>
+                <ul id="reference-list" class="space-y-4 text-xs sm:text-sm text-slate-300 leading-relaxed"></ul>
+                <p id="ref-empty" hidden class="text-sm text-slate-400 text-center py-4">No citations match your search.</p>
             </div>
         </section>
 
-        <!-- Dynamic Slide Navigation Bar at Bottom -->
+        <!-- Page navigation -->
         <div class="mt-8 pt-4 border-t border-slate-800 flex items-center justify-between">
-            <button onclick="navigatePrev()" id="prev-btn" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-xl text-xs sm:text-sm font-semibold flex items-center space-x-2 transition-all">
-                <i class="fa-solid fa-arrow-left"></i>
+            <button type="button" id="prev-btn" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-xl text-xs sm:text-sm font-semibold flex items-center space-x-2 transition-all disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-slate-800">
+                <i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
                 <span>Previous Page</span>
             </button>
-            <div class="text-xs text-slate-500 font-medium">
-                Page <span id="current-page-num" class="text-slate-300 font-bold">1</span> of 6
+            <div class="text-xs text-slate-400 font-medium" aria-live="polite">
+                Page <span id="current-page-num" class="text-slate-200 font-bold">1</span> of <span id="page-total">6</span>
             </div>
-            <button onclick="navigateNext()" id="next-btn" class="px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white rounded-xl text-xs sm:text-sm font-semibold flex items-center space-x-2 transition-all">
+            <button type="button" id="next-btn" class="px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white rounded-xl text-xs sm:text-sm font-semibold flex items-center space-x-2 transition-all disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-blue-600">
                 <span>Next Page</span>
-                <i class="fa-solid fa-arrow-right"></i>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
             </button>
         </div>
-
     </main>
 
-    <!-- Footer -->
-    <footer class="bg-slate-950 border-t border-slate-800 py-4 text-center text-xs text-slate-500">
-        <p>© 2026 Policy Strategy Briefing | Team Members: Anne Salibio Aros, Nicholette Rodriguez, Jared Mesa</p>
+    <footer class="pres-hide bg-slate-950 border-t border-slate-800 py-4 px-4 text-center text-xs text-slate-400">
+        <p>&copy; 2026 Policy Strategy Briefing | Team Members: Anne Salibio Aros, Nicholette Rodriguez, Jared Mesa</p>
+        <p class="mt-1 text-slate-500 hidden sm:block">Tip: use the &larr; &rarr; arrow keys to change pages and <kbd class="px-1 rounded bg-slate-800 text-slate-300">P</kbd> for presentation mode.</p>
     </footer>
 
-    <!-- JavaScript Navigation & Data Logic -->
-    <script>
-        // Pages array for router navigation
-        const pages = ['overview', 'solutions', 'deepdive', 'smart', 'timeline', 'references'];
-        let currentPageIndex = 0;
-        let chartInitialized = false;
-
-        // Navigate directly to a specific page
-        function navigateTo(pageId) {
-            const index = pages.indexOf(pageId);
-            if (index !== -1) {
-                currentPageIndex = index;
-                renderPage();
-            }
-        }
-
-        // Previous and Next buttons logic
-        function navigatePrev() {
-            if (currentPageIndex > 0) {
-                currentPageIndex--;
-                renderPage();
-            }
-        }
-
-        function navigateNext() {
-            if (currentPageIndex < pages.length - 1) {
-                currentPageIndex++;
-                renderPage();
-            }
-        }
-
-        // Render visible page and update active styles
-        function renderPage() {
-            const pageId = pages[currentPageIndex];
-
-            // Hide all pages
-            document.querySelectorAll('.page-view').forEach(p => p.classList.remove('active'));
-
-            // Show current page
-            const activePage = document.getElementById(`page-${pageId}`);
-            if (activePage) activePage.classList.add('active');
-
-            // Update nav button highlights
-            document.querySelectorAll('.nav-btn').forEach(btn => {
-                btn.classList.remove('bg-slate-800', 'text-white');
-                btn.classList.add('text-slate-300');
-            });
-            const activeNavBtn = document.getElementById(`nav-${pageId}`);
-            if (activeNavBtn) {
-                activeNavBtn.classList.add('bg-slate-800', 'text-white');
-            }
-
-            // Update bottom navigation numbers & states
-            document.getElementById('current-page-num').innerText = currentPageIndex + 1;
-            document.getElementById('prev-btn').disabled = (currentPageIndex === 0);
-            document.getElementById('prev-btn').style.opacity = (currentPageIndex === 0) ? '0.5' : '1';
-
-            document.getElementById('next-btn').disabled = (currentPageIndex === pages.length - 1);
-            document.getElementById('next-btn').style.opacity = (currentPageIndex === pages.length - 1) ? '0.5' : '1';
-
-            // Scroll smoothly to top of page container
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-
-            // Initialize Chart on Overview page load
-            if (pageId === 'overview' && !chartInitialized) {
-                initDisparityChart();
-            }
-        }
-
-        // Mobile menu toggle
-        function toggleMobileMenu() {
-            const menu = document.getElementById('mobile-menu');
-            menu.classList.toggle('hidden');
-        }
-
-        // Presentation Mode toggle
-        let isPresentationMode = false;
-        function togglePresentationMode() {
-            isPresentationMode = !isPresentationMode;
-            document.body.classList.toggle('presentation-mode', isPresentationMode);
-            
-            const presText = document.getElementById('pres-text');
-            if (isPresentationMode) {
-                presText.innerText = "Exit Presentation";
-            } else {
-                presText.innerText = "Presentation Mode";
-            }
-        }
-
-        // Disparity Chart (Chart.js)
-        function initDisparityChart() {
-            chartInitialized = true;
-            const ctx = document.getElementById('disparityChart').getContext('2d');
-            new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: ['Electricity (Barangays)', 'Telecom Towers', 'Broadband Subs', 'NCR Internet', 'BARMM Internet'],
-                    datasets: [{
-                        label: 'Coverage / Access (%)',
-                        data: [98.5, 36.3, 18.0, 33.0, 4.0],
-                        backgroundColor: [
-                            'rgba(16, 185, 129, 0.8)',
-                            'rgba(239, 68, 68, 0.8)',
-                            'rgba(245, 158, 11, 0.8)',
-                            'rgba(59, 130, 246, 0.8)',
-                            'rgba(168, 85, 247, 0.8)'
-                        ],
-                        borderRadius: 8
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: { display: false }
-                    },
-                    scales: {
-                        y: {
-                            beginAtZero: true,
-                            max: 100,
-                            grid: { color: 'rgba(255, 255, 255, 0.1)' },
-                            ticks: { color: '#94a3b8' }
-                        },
-                        x: {
-                            grid: { display: false },
-                            ticks: { color: '#94a3b8' }
-                        }
-                    }
-                }
-            });
-        }
-
-        //// Task List Data & Filtering (Official MMDC TA Timeline Tasks 1 - 29)
-const tasksData = [
-  { id: 1, phase: 'phase1', title: 'Task 1: Review MS2 and mentor feedback', status: 'Completed', owner: 'All Members' },
-  { id: 2, phase: 'phase1', title: 'Task 2: Read TA instructions and CAMU rubric', status: 'Completed', owner: 'All Members' },
-  { id: 3, phase: 'phase1', title: 'Task 3: Agree on roles and deliverables', status: 'Completed', owner: 'All Members' },
-  { id: 4, phase: 'phase1', title: 'Task 4: Assign research areas (Anne: Solution 1)', status: 'Completed', owner: 'Asunciana Salibio Aros' },
-  { id: 5, phase: 'phase2', title: 'Task 5: Gather and share additional evidence (Frontiers 2025 Study)', status: 'Completed', owner: 'Asunciana Salibio Aros' },
-  { id: 6, phase: 'phase2', title: 'Task 6: Complete Week 8 worksheet (Solution 1 section)', status: 'Completed', owner: 'Asunciana Salibio Aros' },
-  { id: 7, phase: 'phase2', title: 'Task 7: Share Solution Memo with two reviewers', status: 'Completed', owner: 'Asunciana Salibio Aros' },
-  { id: 8, phase: 'phase2', title: 'Task 8: Review findings and reviewer feedback', status: 'Completed', owner: 'Asunciana Salibio Aros' },
-  { id: 9, phase: 'phase2', title: 'Task 9: Define SMART measures of success', status: 'Completed', owner: 'Asunciana Salibio Aros' },
-  { id: 10, phase: 'phase2', title: 'Task 10: Choose audience and digital format (VS Code Web App)', status: 'Completed', owner: 'Asunciana Salibio Aros' },
-  { id: 11, phase: 'phase2', title: 'Task 11: Complete Coursera planning entry', status: 'Completed', owner: 'Asunciana Salibio Aros' },
-  { id: 12, phase: 'phase2', title: 'Task 12: Complete and share TA timeline', status: 'Completed', owner: 'Asunciana Salibio Aros' },
-  { id: 13, phase: 'phase3', title: 'Task 13: Prepare outline or storyboard for Web App', status: 'Completed', owner: 'Asunciana Salibio Aros' },
-  { id: 14, phase: 'phase3', title: 'Task 14: Develop content and references (APA 7 list)', status: 'Completed', owner: 'Asunciana Salibio Aros' },
-  { id: 15, phase: 'phase3', title: 'Task 15: Produce initial digital draft (Interactive Web App)', status: 'Completed', owner: 'Asunciana Salibio Aros' },
-  { id: 16, phase: 'phase3', title: 'Task 16: Complete mid-project peer evaluation', status: 'Completed', owner: 'Asunciana Salibio Aros' },
-  { id: 17, phase: 'phase3', title: 'Task 17: Submit written draft answers in Coursera', status: 'Completed', owner: 'Asunciana Salibio Aros' },
-  { id: 18, phase: 'phase3', title: 'Task 18: Submit actual draft link in CAMU (Oct 24 Draft Deadline)', status: 'Completed', owner: 'Asunciana Salibio Aros' },
-  { id: 19, phase: 'phase3', title: 'Task 19: Review feedback and consult with mentor if needed', status: 'In Progress', owner: 'Asunciana Salibio Aros' },
-  { id: 20, phase: 'phase3', title: 'Task 20: Revise analysis and solution details', status: 'In Progress', owner: 'Asunciana Salibio Aros' },
-  { id: 21, phase: 'phase4', title: 'Task 21: Finalize digital output and GitHub Pages hosting', status: 'In Progress', owner: 'Asunciana Salibio Aros' },
-  { id: 22, phase: 'phase4', title: 'Task 22: Quality review - Check content, citations, and links', status: 'Pending', owner: 'Asunciana Salibio Aros' },
-  { id: 23, phase: 'phase4', title: 'Task 23: Update role records and Decision Log', status: 'Pending', owner: 'Asunciana Salibio Aros' },
-  { id: 24, phase: 'phase4', title: 'Task 24: Write Contribution Reflection (Individual 150-250 words)', status: 'Pending', owner: 'Asunciana Salibio Aros' },
-  { id: 25, phase: 'phase4', title: 'Task 25: Complete final Peer Evaluation', status: 'Pending', owner: 'Asunciana Salibio Aros' },
-  { id: 26, phase: 'phase4', title: 'Task 26: Organize final folder and check link accessibility', status: 'Pending', owner: 'Asunciana Salibio Aros' },
-  { id: 27, phase: 'phase4', title: 'Task 27: Submit final requirements in CAMU (Nov 07 Final Deadline)', status: 'Pending', owner: 'Asunciana Salibio Aros' },
-  { id: 28, phase: 'phase4', title: 'Task 28: Review assigned output individually', status: 'Pending', owner: 'Asunciana Salibio Aros' },
-  { id: 29, phase: 'phase4', title: 'Task 29: Read feedback and revise if permitted', status: 'Planned', owner: 'Asunciana Salibio Aros' }
-];
-
-        function renderTasks(filter = 'all') {
-            const container = document.getElementById('task-list-container');
-            container.innerHTML = '';
-
-            const filtered = tasksData.filter(t => filter === 'all' || t.phase === filter);
-
-            filtered.forEach(task => {
-                const item = document.createElement('div');
-                item.className = "p-4 flex items-center justify-between hover:bg-slate-800/50 transition-all";
-                item.innerHTML = `
-                    <div class="flex items-center space-x-3">
-                        <div class="w-2.5 h-2.5 rounded-full ${task.status === 'Completed' ? 'bg-emerald-400' : task.status === 'In Progress' ? 'bg-amber-400' : 'bg-slate-600'}"></div>
-                        <div>
-                            <h4 class="text-xs sm:text-sm font-semibold text-white">${task.title}</h4>
-                            <span class="text-xs text-slate-400">Lead: ${task.owner}</span>
-                        </div>
-                    </div>
-                    <span class="px-2.5 py-1 rounded-full text-xs font-medium border ${task.status === 'Completed' ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20' : task.status === 'In Progress' ? 'bg-amber-500/10 text-amber-400 border-amber-500/20' : 'bg-slate-800 text-slate-400 border-slate-700'}">${task.status}</span>
-                `;
-                container.appendChild(item);
-            });
-        }
-
-        function filterTasks(phase) {
-            document.querySelectorAll('.task-filter-btn').forEach(btn => {
-                btn.classList.remove('bg-blue-600', 'text-white');
-                btn.classList.add('bg-slate-800', 'text-slate-300');
-            });
-            event.target.classList.remove('bg-slate-800', 'text-slate-300');
-            event.target.classList.add('bg-blue-600', 'text-white');
-
-            renderTasks(phase);
-        }
-
-        // References Search
-        function searchReferences() {
-            const query = document.getElementById('ref-search').value.toLowerCase();
-            const items = document.querySelectorAll('.ref-item');
-            items.forEach(item => {
-                if (item.innerText.toLowerCase().includes(query)) {
-                    item.style.display = 'block';
-                } else {
-                    item.style.display = 'none';
-                }
-            });
-        }
-
-        // Initialize on load
-        window.onload = function() {
-            renderPage();
-            renderTasks();
-        };
-    </script>
 </body>
 </html>
