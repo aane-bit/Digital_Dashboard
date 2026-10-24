@@ -727,38 +727,37 @@
             });
         }
 
-        // Task List Data & Filtering
-        // Task List Data & Filtering (Official MMDC TA Timeline Tasks 1 - 29)
+        //// Task List Data & Filtering (Official MMDC TA Timeline Tasks 1 - 29)
 const tasksData = [
   { id: 1, phase: 'phase1', title: 'Task 1: Review MS2 and mentor feedback', status: 'Completed', owner: 'All Members' },
   { id: 2, phase: 'phase1', title: 'Task 2: Read TA instructions and CAMU rubric', status: 'Completed', owner: 'All Members' },
   { id: 3, phase: 'phase1', title: 'Task 3: Agree on roles and deliverables', status: 'Completed', owner: 'All Members' },
-  { id: 4, phase: 'phase1', title: 'Task 4: Assign research areas (Anne: Solution 1)', status: 'Completed', owner: 'Asunciana, Nicholette, Jared' },
-  { id: 5, phase: 'phase2', title: 'Task 5: Gather and share additional evidence (Frontiers 2025 Study)', status: 'In Progress', owner: 'Asunciana Salibio Aros' },
-  { id: 6, phase: 'phase2', title: 'Task 6: Complete Week 8 worksheet (Solution 1 section)', status: 'In Progress', owner: 'Asunciana Salibio Aros' },
-  { id: 7, phase: 'phase2', title: 'Task 7: Share Solution Memo with two reviewers', status: 'Pending', owner: 'Group / Solo' },
-  { id: 8, phase: 'phase2', title: 'Task 8: Review findings and reviewer feedback', status: 'Pending', owner: 'All Members' },
-  { id: 9, phase: 'phase2', title: 'Task 9: Define SMART measures of success', status: 'In Progress', owner: 'All Members' },
+  { id: 4, phase: 'phase1', title: 'Task 4: Assign research areas (Anne: Solution 1)', status: 'Completed', owner: 'Asunciana Salibio Aros' },
+  { id: 5, phase: 'phase2', title: 'Task 5: Gather and share additional evidence (Frontiers 2025 Study)', status: 'Completed', owner: 'Asunciana Salibio Aros' },
+  { id: 6, phase: 'phase2', title: 'Task 6: Complete Week 8 worksheet (Solution 1 section)', status: 'Completed', owner: 'Asunciana Salibio Aros' },
+  { id: 7, phase: 'phase2', title: 'Task 7: Share Solution Memo with two reviewers', status: 'Completed', owner: 'Asunciana Salibio Aros' },
+  { id: 8, phase: 'phase2', title: 'Task 8: Review findings and reviewer feedback', status: 'Completed', owner: 'Asunciana Salibio Aros' },
+  { id: 9, phase: 'phase2', title: 'Task 9: Define SMART measures of success', status: 'Completed', owner: 'Asunciana Salibio Aros' },
   { id: 10, phase: 'phase2', title: 'Task 10: Choose audience and digital format (VS Code Web App)', status: 'Completed', owner: 'Asunciana Salibio Aros' },
-  { id: 11, phase: 'phase2', title: 'Task 11: Complete Coursera planning entry', status: 'Pending', owner: 'Asunciana Salibio Aros' },
-  { id: 12, phase: 'phase2', title: 'Task 12: Complete and share TA timeline', status: 'Completed', owner: 'All Members' },
-  { id: 13, phase: 'phase3', title: 'Task 13: Prepare outline or storyboard for Web App', status: 'In Progress', owner: 'Asunciana Salibio Aros' },
-  { id: 14, phase: 'phase3', title: 'Task 14: Develop content and references (APA 7 list)', status: 'In Progress', owner: 'Asunciana, Nicholette, Jared' },
-  { id: 15, phase: 'phase3', title: 'Task 15: Produce initial digital draft (Interactive Web App)', status: 'In Progress', owner: 'Asunciana Salibio Aros' },
-  { id: 16, phase: 'phase3', title: 'Task 16: Complete mid-project peer evaluation', status: 'Pending', owner: 'Each Learner' },
-  { id: 17, phase: 'phase3', title: 'Task 17: Submit written draft answers in Coursera', status: 'Pending', owner: 'All Members' },
-  { id: 18, phase: 'phase3', title: 'Task 18: Submit actual draft link in CAMU (Oct 24 Draft Deadline)', status: 'Pending', owner: 'Group Representative' },
-  { id: 19, phase: 'phase3', title: 'Task 19: Review feedback and consult with mentor if needed', status: 'Planned', owner: 'All Members' },
-  { id: 20, phase: 'phase3', title: 'Task 20: Revise analysis and solution details', status: 'Planned', owner: 'Anne, Nicholette, Jared' },
-  { id: 21, phase: 'phase4', title: 'Task 21: Finalize digital output and GitHub Pages hosting', status: 'Planned', owner: 'Asunciana Salibio Aros' },
-  { id: 22, phase: 'phase4', title: 'Task 22: Quality review - Check content, citations, and links', status: 'Planned', owner: 'All Members' },
-  { id: 23, phase: 'phase4', title: 'Task 23: Update role records and Decision Log', status: 'Planned', owner: 'All Members' },
-  { id: 24, phase: 'phase4', title: 'Task 24: Write Contribution Reflection (Individual 150-250 words)', status: 'Planned', owner: 'Every Learner' },
-  { id: 25, phase: 'phase4', title: 'Task 25: Complete final Peer Evaluation', status: 'Planned', owner: 'Every Learner' },
-  { id: 26, phase: 'phase4', title: 'Task 26: Organize final folder and check link accessibility', status: 'Planned', owner: 'All Members' },
-  { id: 27, phase: 'phase4', title: 'Task 27: Submit final requirements in CAMU (Nov 07 Final Deadline)', status: 'Planned', owner: 'EVERY Learner' },
-  { id: 28, phase: 'phase4', title: 'Task 28: Review assigned output individually', status: 'Planned', owner: 'EVERY Learner' },
-  { id: 29, phase: 'phase4', title: 'Task 29: Read feedback and revise if permitted', status: 'Planned', owner: 'All Members' }
+  { id: 11, phase: 'phase2', title: 'Task 11: Complete Coursera planning entry', status: 'Completed', owner: 'Asunciana Salibio Aros' },
+  { id: 12, phase: 'phase2', title: 'Task 12: Complete and share TA timeline', status: 'Completed', owner: 'Asunciana Salibio Aros' },
+  { id: 13, phase: 'phase3', title: 'Task 13: Prepare outline or storyboard for Web App', status: 'Completed', owner: 'Asunciana Salibio Aros' },
+  { id: 14, phase: 'phase3', title: 'Task 14: Develop content and references (APA 7 list)', status: 'Completed', owner: 'Asunciana Salibio Aros' },
+  { id: 15, phase: 'phase3', title: 'Task 15: Produce initial digital draft (Interactive Web App)', status: 'Completed', owner: 'Asunciana Salibio Aros' },
+  { id: 16, phase: 'phase3', title: 'Task 16: Complete mid-project peer evaluation', status: 'Completed', owner: 'Asunciana Salibio Aros' },
+  { id: 17, phase: 'phase3', title: 'Task 17: Submit written draft answers in Coursera', status: 'Completed', owner: 'Asunciana Salibio Aros' },
+  { id: 18, phase: 'phase3', title: 'Task 18: Submit actual draft link in CAMU (Oct 24 Draft Deadline)', status: 'Completed', owner: 'Asunciana Salibio Aros' },
+  { id: 19, phase: 'phase3', title: 'Task 19: Review feedback and consult with mentor if needed', status: 'In Progress', owner: 'Asunciana Salibio Aros' },
+  { id: 20, phase: 'phase3', title: 'Task 20: Revise analysis and solution details', status: 'In Progress', owner: 'Asunciana Salibio Aros' },
+  { id: 21, phase: 'phase4', title: 'Task 21: Finalize digital output and GitHub Pages hosting', status: 'In Progress', owner: 'Asunciana Salibio Aros' },
+  { id: 22, phase: 'phase4', title: 'Task 22: Quality review - Check content, citations, and links', status: 'Pending', owner: 'Asunciana Salibio Aros' },
+  { id: 23, phase: 'phase4', title: 'Task 23: Update role records and Decision Log', status: 'Pending', owner: 'Asunciana Salibio Aros' },
+  { id: 24, phase: 'phase4', title: 'Task 24: Write Contribution Reflection (Individual 150-250 words)', status: 'Pending', owner: 'Asunciana Salibio Aros' },
+  { id: 25, phase: 'phase4', title: 'Task 25: Complete final Peer Evaluation', status: 'Pending', owner: 'Asunciana Salibio Aros' },
+  { id: 26, phase: 'phase4', title: 'Task 26: Organize final folder and check link accessibility', status: 'Pending', owner: 'Asunciana Salibio Aros' },
+  { id: 27, phase: 'phase4', title: 'Task 27: Submit final requirements in CAMU (Nov 07 Final Deadline)', status: 'Pending', owner: 'Asunciana Salibio Aros' },
+  { id: 28, phase: 'phase4', title: 'Task 28: Review assigned output individually', status: 'Pending', owner: 'Asunciana Salibio Aros' },
+  { id: 29, phase: 'phase4', title: 'Task 29: Read feedback and revise if permitted', status: 'Planned', owner: 'Asunciana Salibio Aros' }
 ];
 
         function renderTasks(filter = 'all') {
